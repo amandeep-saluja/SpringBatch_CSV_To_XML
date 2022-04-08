@@ -23,10 +23,10 @@ import java.net.MalformedURLException;
 public class SpringConfig {
 
     @Value("org/springframework/batch/core/schema-drop-sqlite.sql")
-    private Resource dropReopsitoryTables;
+    private Resource dropRepositoryTables;
 
     @Value("org/springframework/batch/core/schema-sqlite.sql")
-    private Resource dataReopsitorySchema;
+    private Resource dataRepositorySchema;
 
     @Bean
     public DataSource dataSource() {
@@ -39,8 +39,8 @@ public class SpringConfig {
     @Bean
     public DataSourceInitializer dataSourceInitializer(DataSource dataSource) throws MalformedURLException {
         ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator();
-        databasePopulator.addScript(dropReopsitoryTables);
-        databasePopulator.addScript(dataReopsitorySchema);
+        databasePopulator.addScript(dropRepositoryTables);
+        databasePopulator.addScript(dataRepositorySchema);
         databasePopulator.setIgnoreFailedDrops(true);
 
         DataSourceInitializer dataSourceInitializer = new DataSourceInitializer();
@@ -62,6 +62,7 @@ public class SpringConfig {
         return (JobRepository) factory.getObject();
     }
 
+    @Bean
     public JobLauncher getJobLauncher() throws Exception {
         SimpleJobLauncher jobLauncher = new SimpleJobLauncher();
         jobLauncher.setJobRepository(getJobRepository());
