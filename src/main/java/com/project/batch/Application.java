@@ -6,12 +6,6 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 //@SpringBootApplication
@@ -27,22 +21,22 @@ public class Application {
     public static void main(String[] args) {
 
 //		SpringApplication.run(Application.class, args);
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.register(SpringConfig.class);
-		context.register(SpringBatchConfig.class);
-		context.refresh();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.register(SpringConfig.class);
+        context.register(SpringBatchConfig.class);
+        context.refresh();
 
-		JobLauncher launcher = (JobLauncher) context.getBean("jobLauncher");
-		Job job = (Job) context.getBean("firstBatchJob");
-		System.out.println("Starting the batch job");
-		try {
-			JobExecution execution = launcher.run(job, new JobParameters());
-			System.out.println("Job status: "+execution.getStatus());
-			System.out.println("Job Completed");
-		} catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("Job failed");
-		}
+        JobLauncher launcher = (JobLauncher) context.getBean("jobLauncher");
+        Job job = (Job) context.getBean("firstBatchJob");
+        System.out.println("Starting the batch job");
+        try {
+            JobExecution execution = launcher.run(job, new JobParameters());
+            System.out.println("Job status: " + execution.getStatus());
+            System.out.println("Job Completed");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Job failed");
+        }
     }
 
 //	@Override

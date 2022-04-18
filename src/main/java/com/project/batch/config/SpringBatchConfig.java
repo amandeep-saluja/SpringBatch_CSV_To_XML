@@ -42,16 +42,16 @@ public class SpringBatchConfig {
 
     @Bean
     public ItemReader<Transaction> itemReader() {
-        FlatFileItemReader<Transaction> flatFileItemReader = new FlatFileItemReader<>();
+        FlatFileItemReader<Transaction> reader = new FlatFileItemReader<>();
         DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
         String[] tokens = {"username", "userid", "transactiondate", "amount"};
         tokenizer.setNames(tokens);
-        flatFileItemReader.setResource(inputCsv);
+        reader.setResource(inputCsv);
         DefaultLineMapper<Transaction> lineMapper = new DefaultLineMapper<>();
         lineMapper.setLineTokenizer(tokenizer);
         lineMapper.setFieldSetMapper(new RecordFieldSetMapper());
-        flatFileItemReader.setLineMapper(lineMapper);
-        return flatFileItemReader;
+        reader.setLineMapper(lineMapper);
+        return reader;
     }
 
     @Bean

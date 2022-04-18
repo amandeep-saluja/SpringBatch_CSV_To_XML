@@ -16,12 +16,12 @@ public class RecordFieldSetMapper implements FieldSetMapper<Transaction> {
     public Transaction mapFieldSet(FieldSet fieldSet) throws BindException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Transaction transaction = new Transaction();
-        System.out.println(Arrays.stream(fieldSet.getValues()).collect(Collectors.joining(",")));
         transaction.setUserName(fieldSet.readString("username"));
         transaction.setUserId(fieldSet.readInt(1));
         transaction.setAmount(fieldSet.readDouble(3));
         String dateString = fieldSet.readString(2);
         transaction.setTransactionDate(LocalDate.parse(dateString, formatter).atStartOfDay());
-        return null;
+        System.out.println(transaction.toString());
+        return transaction;
     }
 }

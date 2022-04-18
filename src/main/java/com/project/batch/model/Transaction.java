@@ -6,17 +6,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlRootElement;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @XmlRootElement(name = "transactionRecord")
 public class Transaction {
-    private String userName;
+
     private Integer userId;
+    private String userName;
     private LocalDateTime transactionDate;
     private Double Amount;
 

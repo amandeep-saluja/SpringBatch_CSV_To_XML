@@ -6,6 +6,7 @@ import org.springframework.batch.item.ItemProcessor;
 public class CustomItemProcessor implements ItemProcessor<Transaction, Transaction> {
     @Override
     public Transaction process(Transaction transaction) throws Exception {
+        System.out.println("Processing item: " + transaction.toString());
         return transaction;
     }
 }
